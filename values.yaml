@@ -12,7 +12,9 @@ service:
 influxdb:
   enabled: true
 
-  image: "1.5-alpine"
+  image: 
+    repo: "influxdb"
+    tag: "1.5-alpine"
 
   ## Influxdb persistence configuration
   persistence:
@@ -53,7 +55,7 @@ grafana:
         url: http://influxdb:8086
         database: on_disc
         access: direct
-        isDefault: true
+        isDefault: false
 
   ## Grafana ingress configuration
   ingress:

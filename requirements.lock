@@ -1,0 +1,9 @@
+dependencies:
+- name: influxdb
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 0.9.1
+- name: grafana
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 1.10.0
+digest: sha256:004970515ab216fdd2eb96bacf833e03ba08026ed82a9e7f6ab93aecac45eed6
+generated: 2018-06-08T11:17:03.541534867+02:00
