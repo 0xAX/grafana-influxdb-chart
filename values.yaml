@@ -1,0 +1,77 @@
+## Influxdb configuration
+influxdb:
+  enabled: true
+
+  ## Influxdb persistence configuration
+  persistence:
+    enabled: false
+    accessMode: ReadWriteOnce
+    size: 2Gi
+
+  ## User configuration
+  user:
+    username: "admin"
+    privileges: "WITH ALL PRIVILEGES"
+
+## Grafana configuration
+grafana:
+  ## Enable grafana at startup
+  enabled: true
+
+  ## Grafana admin
+  adminUser: admin
+  ## Grafana admin password
+  adminPassword: admin
+
+  ## influxdb data source configuration
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+      - name: influxdb-in-memory
+        type: influxdb
+        access: proxy
+        url: http://influxdb:8086
+        database: in_memory
+        access: direct
+        isDefault: true
+      - name: influxdb-on-disc
+        type: influxdb
+        access: proxy
+        url: http://influxdb:8086
+        database: on_disc
+        access: direct
+        isDefault: true
+
+  ## Grafana ingress configuration
+  ingress:
+    ## Enable ingress for grafana pod
+    enabled: true
+
+    ## Grafana Ingress annotations
+    annotations:
+      kubernetes.io/ingress.class: nginx
+
+    ## Ingress hosts for grafana dashboard
+    hosts:
+      - influxdb-backup.k8s.tplabs.net
+
+  ## Grafana service configuration
+  service:
+    ## Grafana service port
+    port: 80
+    ## Grafana service type
+    type: ClusterIP
+
+  ## Grafana persistence configuration
+  persistence:
+    ## Enable PVC for Grafana
+    enabled: false
+    ## Access mode to a Grafana PVC
+    accessMode: ReadWriteOnce
+    ## Default size for Grafana PVC
+    size: 2Gi
+    ## Storage class type of Grafana PVC
+    storageClass: null
+    # Use existing PVC
+    existingClaim: ""
