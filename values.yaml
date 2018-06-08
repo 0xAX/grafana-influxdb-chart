@@ -1,6 +1,18 @@
+image:
+  repo: "alpine"
+  tag: "latest"
+
+ingress:
+  enabled: false
+
+service:
+  type: ClusterIP
+  
 ## Influxdb configuration
 influxdb:
   enabled: true
+
+  image: "1.5-alpine"
 
   ## Influxdb persistence configuration
   persistence:
